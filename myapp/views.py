@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .models import Board
+from .models import Board, Comment
 
 from django.utils import timezone
+
+from .forms import CommentForm
 
 # Create your views here.
 
@@ -41,3 +43,16 @@ def update(request, board_id):
     board.pub_date = timezone.datetime.now()
     board.save()
     return redirect('/')
+
+def comment_new(request, board_id):
+    post = get_object_or_404(Board, pk=board_id)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = Board.objects.get(pk=board_id)
+            comment.save()
+            return redirect('detail', board_id)
+    else:
+        form= CommentForm()
+    return render(request, 'board_form.html', {'form':form})
