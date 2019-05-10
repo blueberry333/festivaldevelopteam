@@ -12,7 +12,7 @@
     {% for comment in board.comments.all %}
     <div class="comment">
         <li>
-            {{ comment.text }}<small>by <strong>{{ comment.author }}</strong>, {{ comment.created_at }}</small>
+            {{ comment.busy }} / {{ comment.text }}<small>by <strong>{{ comment.author }}</strong>, {{ comment.created_at }}</small>
         </li>
     </div>
 
