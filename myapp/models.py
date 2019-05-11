@@ -22,6 +22,8 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     busy = models.CharField(max_length=20, choices = CHOICE_BUSY)
+    password =models.CharField(max_length=20, null=False)
+
 
     def approve(self):
         self.approved_comment = True

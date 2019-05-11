@@ -12,8 +12,12 @@
     {% for comment in board.comments.all %}
     <div class="comment">
         <li>
-            {{ comment.busy }} / {{ comment.text }}<small>by <strong>{{ comment.author }}</strong>, {{ comment.created_at }}</small>
+            {{ comment.busy }} / {{ comment.text }}<small>by <strong>{{ comment.author }}</strong>, {{ comment.created_at }}</small>, {{ comment.password }}
         </li>
+    </div>
+
+    <div class="comment_delete">
+        <a href="{% url 'comment_delete' comment.id %}"> [x] </a>
     </div>
 
     {% empty %}
