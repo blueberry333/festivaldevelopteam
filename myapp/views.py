@@ -57,13 +57,11 @@ def comment_new(request, board_id):
         form= CommentForm()
     return render(request, 'board_form.html', {'form':form})
 
-def comment_delete(request, comment_id, password):
-    password=PASSWORD()
-    password.password2=request.GET['password2']
-    password=Comment.objects.get(pk=comment_password)
-    if(password==password2):
-        comment=Comment.objects.get(pk=comment_id)
-        comment.delete()
-        return redirect('board',board_id)
-
-        
+def comment_delete(request, comment_id):
+#    password_input=request.GET['password']
+#    passwordregistered = 
+#    if(passwordinput==passwordregistered):
+#    comment=Comment.objects.get(pk=comment_id)
+#    comment.delete()
+#    return redirect('board', board_id)
+    return redirect('/')
