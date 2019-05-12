@@ -45,10 +45,10 @@ def update(request, board_id):
     return redirect('/')
 
 def comment_new(request, board_id):
-    post = get_object_or_404(Board, pk=board_id)
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
+            comment = Comment()
             comment = form.save(commit=False)
             comment.post = Board.objects.get(pk=board_id)
             comment.save()
@@ -57,11 +57,9 @@ def comment_new(request, board_id):
         form= CommentForm()
     return render(request, 'board_form.html', {'form':form})
 
-def comment_delete(request, comment_id):
-#    password_input=request.GET['password']
-#    passwordregistered = 
-#    if(passwordinput==passwordregistered):
-#    comment=Comment.objects.get(pk=comment_id)
-#    comment.delete()
-#    return redirect('board', board_id)
-    return redirect('/')
+def comment_delete(request, board_id, comment_id):
+    comment = Comment.objects.get(pk=comment_id)
+    password2 = request.GET.get('password2')
+    if comment.password == password2:
+        comment.delete()
+        return render(request, 'comment_delete.html', {'comment': comment})

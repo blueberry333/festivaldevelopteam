@@ -2,6 +2,8 @@
 
 <br>
 <div class="container"></div>
-    <form action="{% url 'comment_delete' comment.id %}" method=""> 
+    <form action="{% url 'comment_delete' board.id comment.id %}"> 
     <br>
-    <textarea cols=40 rows=10 name="input"></textarea>
+    삭제하려면 비밀번호를 입력하세요.
+    <input type="text" name="password2">
+    <input class="btn btn-dark" type="submit" value="제출하기">
