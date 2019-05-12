@@ -17,13 +17,15 @@ class Comment(models.Model):
         ('매우 혼잡','매우 혼잡'),('혼잡', '혼잡'),('보통', '보통'),('여유', '여유'),
     )
     post = models.ForeignKey(Board, related_name='comments', on_delete=models.CASCADE)
-    author = models.CharField(max_length=10)
     text = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    comment_date = models.DateTimeField(auto_now_add=True)
+    comment_contents = models.CharField(max_length=400)
+    dropdown = models.CharField(max_length=10)
     busy = models.CharField(max_length=20, choices = CHOICE_BUSY)
     password =models.CharField(max_length=20, null=False)
 
+    class Meta:
+        ordering = ['-comment_date']
 
     def approve(self):
         self.approved_comment = True
